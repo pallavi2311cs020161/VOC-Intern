@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pallavi Darji - Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #2c3e50;
+      --secondary-color: #18bc9c;
+      --bg-color: #f9f9f9;
+      --text-color: #333;
+      --white: #fff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(to right, #2980b9, #6dd5fa);
+      color: var(--white);
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    header h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.2em;
+    }
+
+    nav {
+      background: var(--primary-color);
+      text-align: center;
+      padding: 15px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav a {
+      color: var(--white);
+      margin: 0 20px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--secondary-color);
+    }
+
+    section {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 30px;
+      background-color: var(--white);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    section:hover {
+      transform: translateY(-3px);
+    }
+
+    section h2 {
+      margin-bottom: 20px;
+      font-size: 2em;
+      color: var(--primary-color);
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 8px;
+    }
+
+    ul, ol {
+      margin-left: 20px;
+    }
+
+    h3 {
+      margin-top: 20px;
+      color: var(--secondary-color);
+    }
+
+    a {
+      color: var(--secondary-color);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      background-color: var(--primary-color);
+      color: var(--white);
+      text-align: center;
+      padding: 20px;
+      margin-top: 60px;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2em;
+      }
+
+      nav a {
+        display: inline-block;
+        margin: 10px;
+      }
+
+      section {
+        margin: 20px;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Pallavi Darji</h1>
+    <p>AI & ML Student | Developer | Tech Enthusiast</p>
+  </header>
+
+  <nav>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#education">Education</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#achievements">Achievements</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      I'm a passionate B.Tech student at Malla Reddy University specializing in Artificial Intelligence and Machine Learning. 
+      I enjoy solving real-world problems using technology and have hands-on experience in Python, SQL, and web development. 
+      I believe in continuous learning and strive to make a meaningful impact through innovation.
+    </p>
+  </section>
+
+  <section id="skills">
+    <h2>Skills & Interests</h2>
+    <h3>Languages</h3>
+    <ul>
+      <li>Python</li>
+      <li>Java</li>
+      <li>HTML/CSS</li>
+    </ul>
+
+    <h3>Frameworks</h3>
+    <ul>
+      <li>React</li>
+      <li>Bootstrap</li>
+    </ul>
+
+    <h3>Databases & Cloud</h3>
+    <ul>
+      <li>MySQL</li>
+      <li>MongoDB</li>
+    </ul>
+
+    <h3>Soft Skills</h3>
+    <ul>
+      <li>Leadership</li>
+      <li>Communication</li>
+      <li>Time Management</li>
+      <li>Critical Thinking</li>
+    </ul>
+
+    <h3>Areas of Interest</h3>
+    <ol>
+      <li>UI/UX Design</li>
+      <li>Data Structures & Algorithms</li>
+      <li>Web Development</li>
+    </ol>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <h3>Bank Loan Fraud Detection</h3>
+    <p>
+      Built a classification model using Logistic Regression and Random Forest to detect fraudulent loan applications. 
+      Helped reduce risk for financial institutions. <br>
+      <strong>Tools:</strong> Python, MySQL, HTML/CSS
+    </p>
+
+    <h3>Library Management System</h3>
+    <p>
+      Designed and developed a digital library system with book search, user login, and transaction logs. <br>
+      <strong>Tools:</strong> Python, MySQL, HTML/CSS
+    </p>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <ul>
+      <li><strong>Malla Reddy University, Hyderabad</strong> (2023–2027) — B.Tech in AI & ML — CGPA: 9.0</li>
+      <li><strong>Sri Chaitanya</strong> (2021–2023) — CGPA: 9.88</li>
+      <li><strong>Siddarth Model High School</strong> (2021) — CGPA: 10</li>
+    </ul>
+  </section>
+
+  <section id="certifications">
+    <h2>Certifications & Workshops</h2>
+    <h3>Certifications</h3>
+    <ul>
+      <li>Cambridge B2</li>
+      <li>Entrepreneur Summit</li>
+      <li>Python</li>
+      <li>Java</li>
+    </ul>
+
+    <h3>Workshops Attended</h3>
+    <ul>
+      <li>Django</li>
+      <li>Artificial Intelligence</li>
+      <li>Machine Learning</li>
+    </ul>
+  </section>
+
+  <section id="achievements">
+    <h2>Achievements</h2>
+    <ul>
+      <li>Top Performer in Group Projects</li>
+      <li>Recognized for Communication in JAM Sessions</li>
+      <li>Balanced academics with personal learning goals effectively</li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p><strong>Email:</strong> <a href="mailto:pallavidarji71@gmail.com">pallavidarji71@gmail.com</a></p>
+    <p><strong>Phone:</strong> +91-9177850265</p>
+    <p><strong>GitHub:</strong> <a href="https://github.com/pallavi2311cs020161" target="_blank">github.com/pallavi2311cs020161</a></p>
+    <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/pallavi-darji-085555322/" target="_blank">linkedin.com/in/pallavi-darji</a></p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Pallavi Darji. All Rights Reserved.</p>
+  </footer>
+
+</body>
+</html>
+
