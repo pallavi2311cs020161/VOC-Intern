@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ProTask – Smart To-Do</title>
+  <style>
+    :root {
+      --primary: #6c63ff;
+      --secondary: #ffe76a;
+      --accent: #ff7eb3;
+      --background: #f9fafe;
+      --text: #222;
+      --card-bg: #ffffff;
+      --completed: #d1fae5;
+    }
+
+    * {
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right top, #ffecd2, #fcb69f);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 650px;
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    h2 {
+      text-align: center;
+      color: var(--primary);
+      font-size: 28px;
+      margin-bottom: 25px;
+      text-shadow: 1px 1px 2px #ccc;
+    }
+
+    .task-input {
+      display: grid;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    input, select {
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 8px rgba(255, 126, 179, 0.3);
+    }
+
+    button {
+      background: linear-gradient(to right, #6c63ff, #b46fff);
+      color: white;
+      font-weight: bold;
+      border: none;
+      padding: 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #ff7eb3, #ff758c);
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-between;
+      font-size: 15px;
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      background: #fefefe;
+      border-left: 8px solid transparent;
+      padding: 16px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    li.completed {
+      background-color: var(--completed);
+    }
+
+    .priority-low { border-color: #34d399; }
+    .priority-medium { border-color: #facc15; }
+    .priority-high { border-color: #ef4444; }
+
+    .task-info span {
+      display: block;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .task-info small {
+      font-size: 13px;
+      color: #888;
+    }
+
+    .task-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .task-actions button {
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .task-actions button:hover {
+      transform: scale(1.2);
+    }
+
+    @media (max-width: 600px) {
+      .stats {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🌈 ProTask – Smart To-Do</h2>
+
+    <div class="task-input">
+      <input type="text" id="taskText" placeholder="What needs to be done?" />
+      <select id="taskPriority">
+        <option value="low">🟢 Low Priority</option>
+        <option value="medium" selected>🟡 Medium Priority</option>
+        <option value="high">🔴 High Priority</option>
+      </select>
+      <input type="date" id="taskDate" />
+      <button onclick="addTask()">➕ Add Task</button>
+    </div>
+
+    <div class="stats">
+      <span id="summary">Tasks: 0 | Completed: 0 | Pending: 0</span>
+      <span id="score">🎯 Score: 0</span>
+    </div>
+
+    <ul id="taskList"></ul>
+  </div>
+
+  <script>
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+    function updateStats() {
+      const total = tasks.length;
+      const completed = tasks.filter(t => t.completed).length;
+      const pending = total - completed;
+      document.getElementById("summary").textContent = `Tasks: ${total} | Completed: ${completed} | Pending: ${pending}`;
+      document.getElementById("score").textContent = `🎯 Score: ${completed * 10}`;
+    }
+
+    function renderTasks() {
+      const taskList = document.getElementById("taskList");
+      taskList.innerHTML = "";
+      tasks.forEach((task, index) => {
+        const li = document.createElement("li");
+        li.classList.add(`priority-${task.priority}`);
+        if (task.completed) li.classList.add("completed");
+
+        const info = document.createElement("div");
+        info.className = "task-info";
+        info.innerHTML = `
+          <span>${task.text}</span>
+          <small>Due: ${task.date || "N/A"}</small>
+        `;
+
+        const actions = document.createElement("div");
+        actions.className = "task-actions";
+        const toggleBtn = document.createElement("button");
+        toggleBtn.textContent = task.completed ? "✅" : "⬜";
+        toggleBtn.onclick = () => toggleTask(index);
+
+        const delBtn = document.createElement("button");
+        delBtn.textContent = "🗑️";
+        delBtn.onclick = () => deleteTask(index);
+
+        actions.append(toggleBtn, delBtn);
+        li.append(info, actions);
+        taskList.appendChild(li);
+      });
+      updateStats();
+    }
+
+    function addTask() {
+      const text = document.getElementById("taskText").value.trim();
+      const priority = document.getElementById("taskPriority").value;
+      const date = document.getElementById("taskDate").value;
+
+      if (!text) return alert("Please enter a task!");
+
+      tasks.push({ text, priority, date, completed: false });
+      saveTasks();
+      document.getElementById("taskText").value = "";
+      document.getElementById("taskDate").value = "";
+    }
+
+    function toggleTask(index) {
+      tasks[index].completed = !tasks[index].completed;
+      saveTasks();
+    }
+
+    function deleteTask(index) {
+      tasks.splice(index, 1);
+      saveTasks();
+    }
+
+    function saveTasks() {
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+      renderTasks();
+    }
+
+    window.onload = renderTasks;
+  </script>
+</body>
+</html>
